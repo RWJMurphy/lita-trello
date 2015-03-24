@@ -20,11 +20,11 @@ module Lita
           return
         end
 
-        r.reply "Ok #{r.user.name}, I'm creating a new card in #{list}."
+        r.reply "Ok #{r.user.name}, I'm creating a new card in #{list_name}."
         begin
           card = new_card(name, list_id)
           r.reply "Here you go: #{card.short_url}"
-        rescue => err
+        rescue
           r.reply "Something failed."
         end
       end
@@ -56,7 +56,7 @@ module Lita
         begin
           card.move_to_list(list)
           r.reply "Ok #{r.user.name}, I moved that card to #{list_name}."
-        rescue => err
+        rescue
           r.reply "Something failed."
         end
       end
@@ -82,16 +82,11 @@ module Lita
       })
       def handle_lists(r)
         r.reply("Here are all the lists on your board:\n\n" +
-          lists.each_pair.map { |list_name, list| "* #{list_name}" }.join("\n")
+          lists.keys.map { |list_name| "* #{list_name}" }.join("\n")
         )
       end
 
       private
-      def debug_reply(response, m)
-        m == "```\n#{m}\n```"
-        response.reply(m)
-      end
-
       def trello
         @trello ||= ::Trello::Client.new(
           developer_public_key: config.public_key,
