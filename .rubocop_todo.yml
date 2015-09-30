@@ -34,11 +34,6 @@ Style/ClosingParenthesisIndentation:
   Exclude:
     - 'lib/lita/handlers/trello.rb'
 
-# Offense count: 2
-Style/Documentation:
-  Exclude:
-    - 'lib/lita/handlers/trello.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/EmptyLinesAroundAccessModifier:
@@ -51,12 +46,6 @@ Style/EmptyLinesAroundAccessModifier:
 Style/EmptyLinesAroundClassBody:
   Exclude:
     - 'lib/lita/handlers/trello.rb'
-
-# Offense count: 1
-# Configuration parameters: Exclude.
-Style/FileName:
-  Exclude:
-    - 'lib/lita-trello.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

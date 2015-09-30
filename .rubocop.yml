@@ -1,1 +1,9 @@
+Documentation:
+  Exclude:
+    - lib/lita/handlers/trello.rb
+
+FileName:
+  Exclude:
+    - lib/lita-trello.rb
+
 inherit_from: .rubocop_todo.yml
