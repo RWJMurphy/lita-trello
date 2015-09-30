@@ -6,4 +6,14 @@ FileName:
   Exclude:
     - lib/lita-trello.rb
 
-inherit_from: .rubocop_todo.yml
+Metrics/AbcSize:
+  Max: 23
+
+Metrics/ClassLength:
+  Max: 115
+
+Metrics/LineLength:
+  Max: 115
+
+Metrics/MethodLength:
+  Max: 18

@@ -1,5 +1,3 @@
-require 'trello'
-
 module Lita
   module Handlers
     class Trello < Handler
@@ -95,21 +93,22 @@ module Lita
         end
 
         r.reply(t('card.list', list_name: list_name) +
-          list.cards.map { |card| "* #{card.name} - #{card.short_url}" }.join("\n")
-        )
+                list.cards.map { |card| "* #{card.name} - #{card.short_url}" }.join("\n")
+               )
       end
 
       def show_lists(r)
         r.reply(t('list.list') +
-          lists.keys.map { |list_name| "* #{list_name}" }.join("\n")
-        )
+                lists.keys.map { |list_name| "* #{list_name}" }.join("\n")
+               )
       end
 
       private
+
       def trello
         @trello ||= ::Trello::Client.new(
           developer_public_key: config.public_key,
-          member_token: config.token,
+          member_token: config.token
         )
       end
 
@@ -127,13 +126,12 @@ module Lita
         @default_list_id ||= redis.get('default_list_id')
       end
 
-      def new_card(name, list_id=nil)
+      def new_card(name, list_id = nil)
         trello.create(:card,
-          'name' => name,
-          'idList' => list_id || default_list_id,
-        )
+                      'name' => name,
+                      'idList' => list_id || default_list_id
+                     )
       end
-
     end
 
     Lita.register_handler(Trello)

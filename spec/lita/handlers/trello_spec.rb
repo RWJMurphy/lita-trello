@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe Lita::Handlers::Trello, lita_handler: true do
   it { is_expected.to route_command('trello new LIST Do the thing').to(:new) }
@@ -53,7 +53,7 @@ describe Lita::Handlers::Trello, lita_handler: true do
     xit 'moves a card' do
       expect(::Trello::Client).to receive(:new) { client }
       send_command('trello move https://trello.com/c/CARD_ID listname')
-      expect(replies.last).to eq("WHA")
+      expect(replies.last).to eq('WHA')
     end
   end
 
