@@ -7,12 +7,45 @@ module Lita
       config :token
       config :board
 
-      route(/^trello\s+new\s+[^\s]+\s+[^\s]+/i, :handle_create_card, command: true, help: {
-        t('help.new.syntax') => t('help.new.desc')
-      })
-      def handle_create_card(r)
-        list_name = r.args[1]
-        name = r.args[2..-1].join(" ")
+      route(
+        /^trello\s+new\s+(?<list_name>\w+)\s+(?<name>.*)/i,
+        :new,
+        command: true,
+        help: {
+          t('help.new.syntax') => t('help.new.desc')
+        }
+      )
+
+      route(
+        %r{^trello\s+move\s+https://trello.com/c/(?<card_id>\w+)\s+(?<list_name>\w+)},
+        :move,
+        command: true,
+        help: {
+          t('help.move.syntax') => t('help.move.desc')
+        }
+      )
+
+      route(
+        /^trello\s+list\s+(?<list_name>\w+)/i,
+        :list,
+        command: true,
+        help: {
+          t('help.list.syntax') => t('help.list.desc')
+        }
+      )
+
+      route(
+        /^trello\s+lists$/i,
+        :show_lists,
+        command: true,
+        help: {
+          t('help.lists.syntax') => t('help.lists.desc')
+        }
+      )
+
+      def new(r)
+        list_name = r.match_data['list_name']
+        name = r.match_data['name']
 
         list_id = lists[list_name.downcase].id
         if list_id.nil?
@@ -29,22 +62,14 @@ module Lita
         end
       end
 
-      route(/^trello\s+move\s+[^\s]+\s+[^\s]+/i, :handle_move_card, command: true, help: {
-        t('help.move.syntax') => t('help.move.desc')
-      })
-      def handle_move_card(r)
-        card_id = r.args[1]
-        list_name = r.args[2]
+      def move(r)
+        card_id = r.match_data['card_id']
+        list_name = r.match_data['list_name']
 
         list = lists[list_name.downcase]
         if list.nil?
           r.reply t('error.no_list', list_name: list_name)
           return
-        end
-
-        card_id = card_id.gsub(/(^<|>$)/, '')
-        if %r{^https?://trello.com/c/([^/]+)/?$} =~ card_id
-          card_id = $1
         end
 
         card = trello.find(:card, card_id)
@@ -61,11 +86,8 @@ module Lita
         end
       end
 
-      route(/^trello\s+list\s+[^\s]+/i, :handle_list_cards, command: true, help: {
-        t('help.list.syntax') => t('help.list.desc')
-      })
-      def handle_list_cards(r)
-        list_name = r.args[1]
+      def list(r)
+        list_name = r.match_data['list_name']
         list = lists[list_name.downcase]
         if list.nil?
           r.reply t('error.no_list', list_name: list_name)
@@ -77,10 +99,7 @@ module Lita
         )
       end
 
-      route(/^trello\s+lists$/i, :handle_lists, command: true, help: {
-        t('help.lists.syntax') => t('help.lists.desc')
-      })
-      def handle_lists(r)
+      def show_lists(r)
         r.reply(t('list.list') +
           lists.keys.map { |list_name| "* #{list_name}" }.join("\n")
         )
