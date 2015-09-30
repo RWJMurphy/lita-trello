@@ -1,12 +1,10 @@
 require "spec_helper"
 
 describe Lita::Handlers::Trello, lita_handler: true do
-  it do
-    is_expected.to route_command('trello new LIST Do the thing').to(:handle_create_card)
-    is_expected.to route_command('trello move https://trello.com/c/CARD_ID LIST').to(:handle_move_card)
-    is_expected.to route_command('trello list LIST').to(:handle_list_cards)
-    is_expected.to route_command('trello lists').to(:handle_lists)
-  end
+  it { is_expected.to route_command('trello new LIST Do the thing').to(:handle_create_card) }
+  it { is_expected.to route_command('trello move https://trello.com/c/CARD_ID LIST').to(:handle_move_card) }
+  it { is_expected.to route_command('trello list LIST').to(:handle_list_cards) }
+  it { is_expected.to route_command('trello lists').to(:handle_lists) }
 
   before do
     registry.config.handlers.trello.public_key = 'foo'
