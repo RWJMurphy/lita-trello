@@ -41,7 +41,7 @@ describe Lita::Handlers::Trello, lita_handler: true do
     client
   end
 
-  describe '#handle_create_card' do
+  describe '#new' do
     it 'creates a card' do
       expect(::Trello::Client).to receive(:new) { client }
       send_command('trello new listname Do the thing')
@@ -49,7 +49,7 @@ describe Lita::Handlers::Trello, lita_handler: true do
     end
   end
 
-  describe '#handle_move_card' do
+  describe '#move' do
     xit 'moves a card' do
       expect(::Trello::Client).to receive(:new) { client }
       send_command('trello move https://trello.com/c/CARD_ID listname')
@@ -57,7 +57,7 @@ describe Lita::Handlers::Trello, lita_handler: true do
     end
   end
 
-  describe '#handle_list_cards' do
+  describe '#list' do
     it 'shows cards for a list' do
       expect(::Trello::Client).to receive(:new) { client }
       send_command('trello list listname')
@@ -71,7 +71,7 @@ describe Lita::Handlers::Trello, lita_handler: true do
     end
   end
 
-  describe '#handle_lists' do
+  describe '#show_lists' do
     it 'shows lists' do
       expect(::Trello::Client).to receive(:new) { client }
       send_command('trello lists')
