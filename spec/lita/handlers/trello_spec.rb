@@ -17,7 +17,7 @@ describe Lita::Handlers::Trello, lita_handler: true do
     card = double
     allow(card).to receive(:name) { 'cardname' }
     allow(card).to receive(:short_url) { 'http://example.com/cardshorturl' }
-    allow(card).to receive(:move_to_list) { true }
+    allow(card).to receive(:move_to_list).with(anything) { true }
     card
   end
 
@@ -37,7 +37,8 @@ describe Lita::Handlers::Trello, lita_handler: true do
 
   let(:client) do
     client = double
-    allow(client).to receive(:find) { board }
+    allow(client).to receive(:find).with(:board, kind_of(String)) { board }
+    allow(client).to receive(:find).with(:card, kind_of(String)) { card }
     allow(client).to receive(:create) { card }
     client
   end
@@ -51,10 +52,10 @@ describe Lita::Handlers::Trello, lita_handler: true do
   end
 
   describe '#move' do
-    xit 'moves a card' do
+    it 'moves a card' do
       expect(::Trello::Client).to receive(:new) { client }
       send_command('trello move https://trello.com/c/CARD_ID listname')
-      expect(replies.last).to eq('WHA')
+      expect(replies.last).to eq('Ok Test User, I moved that card to listname.')
     end
   end
 
