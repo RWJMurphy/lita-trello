@@ -15,7 +15,7 @@ module Lita
       )
 
       route(
-        %r{^trello\s+move\s+https://trello.com/c/(?<card_id>\w+)\s+(?<list_name>\w+)},
+        %r{^trello\s+move\s+https://trello.com/c/(?<card_id>\w+)\s+(?<list_name>(\w+|"[^"]+"))},
         :move,
         command: true,
         help: {
@@ -24,7 +24,7 @@ module Lita
       )
 
       route(
-        /^trello\s+list\s+(?<list_name>\w+)/i,
+        /^trello\s+list\s+(?<list_name>(\w+|"[^"]+"))/i,
         :list,
         command: true,
         help: {
