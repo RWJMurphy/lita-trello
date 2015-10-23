@@ -2,3 +2,27 @@ en:
   lita:
     handlers:
       trello:
+        error:
+          generic: Something failed.
+          no_list: "I couldn't find a list named %{list_name}."
+          no_card: "I couldn't find that card."
+        help:
+          new:
+            syntax: trello new LIST Do the thing
+            desc: Create a new card in LIST called 'Do the thing'
+          move:
+            syntax: trello move https://trello.com/c/CARD_ID LIST
+            desc: Move a card to LIST
+          list:
+            syntax: trello list LIST
+            desc: Show all cards in LIST
+          lists:
+            syntax: trello lists
+            desc: Show all lists on your board
+        card:
+          creating: "Ok %{user_name}, I'm creating a new card in %{list_name}."
+          created: "Here you go: %{url}"
+          moved: "Ok %{user_name}, I moved that card to %{list_name}."
+          list: "Here are the cards in %{list_name}:\n\n"
+        list:
+          list: "Here are all the lists on your board:\n\n"

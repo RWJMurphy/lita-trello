@@ -1,5 +1,12 @@
 # lita-trello
 
+[![Build Status](https://img.shields.io/travis/RWJMurphy/lita-trello/master.svg)](https://travis-ci.org/RWJMurphy/lita-trello)
+[![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://tldrlegal.com/license/mit-license)
+[![RubyGems](http://img.shields.io/gem/v/lita-trello.svg)](https://rubygems.org/gems/lita-trello)
+[![Coveralls Coverage](https://img.shields.io/coveralls/RWJMurphy/lita-trello/master.svg)](https://coveralls.io/r/RWJMurphy/lita-trello)
+[![Code Climate](https://img.shields.io/codeclimate/github/RWJMurphy/lita-trello.svg)](https://codeclimate.com/github/RWJMurphy/lita-trello)
+[![Gemnasium](https://img.shields.io/gemnasium/RWJMurphy/lita-trello.svg)](https://gemnasium.com/RWJMurphy/lita-trello)
+
 Manage your Trello board from Lita.
 
 Inspired by [hubot-trello](https://github.com/hubot-scripts/hubot-trello).

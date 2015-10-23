@@ -1,0 +1,19 @@
+Documentation:
+  Exclude:
+    - lib/lita/handlers/trello.rb
+
+FileName:
+  Exclude:
+    - lib/lita-trello.rb
+
+Metrics/AbcSize:
+  Max: 23
+
+Metrics/ClassLength:
+  Max: 115
+
+Metrics/LineLength:
+  Max: 115
+
+Metrics/MethodLength:
+  Max: 18
