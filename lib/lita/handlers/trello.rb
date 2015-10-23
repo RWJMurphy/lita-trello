@@ -6,7 +6,7 @@ module Lita
       config :board
 
       route(
-        /^trello\s+new\s+(?<list_name>\w+)\s+(?<name>.*)/i,
+        /^trello\s+new\s+(?<list_name>(\w+|"[^"]+"))\s+(?<name>.*)/i,
         :new,
         command: true,
         help: {
