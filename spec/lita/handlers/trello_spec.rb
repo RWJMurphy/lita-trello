@@ -4,7 +4,9 @@ describe Lita::Handlers::Trello, lita_handler: true do
   it { is_expected.to route_command('trello new LIST Do the thing').to(:new) }
   it { is_expected.to route_command('trello new "A LIST" Do the thing').to(:new) }
   it { is_expected.to route_command('trello move https://trello.com/c/CARD_ID LIST').to(:move) }
+  it { is_expected.to route_command('trello move https://trello.com/c/CARD_ID "A LIST"').to(:move) }
   it { is_expected.to route_command('trello list LIST').to(:list) }
+  it { is_expected.to route_command('trello list "A LIST"').to(:list) }
   it { is_expected.to route_command('trello lists').to(:show_lists) }
 
   before do
